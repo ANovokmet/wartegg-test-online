@@ -167,11 +167,11 @@
 	setContext('nav', {
 		pages,
 		toPage(index) {
-			navigate(`results/c/${index}`);
+			navigate(`/results/c/${index}`);
 		}
 	});
 
-	navigate('');
+	navigate('/');
 </script>
 
 <Router basepath="/wartegg-test-online" url="{url}">

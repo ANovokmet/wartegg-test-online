@@ -17,7 +17,7 @@
 	async function onSubmit() {
 		emitEvent({type: 'save'});
 		await tick();
-		navigate('results/c/0');
+		navigate('/results/c/0');
 	}
 
 </script>
