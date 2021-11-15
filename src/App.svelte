@@ -1,89 +1,92 @@
 <script>
+	import { setContext, tick } from 'svelte';
+  	import { Router, Link, Route, navigate } from "svelte-routing";
+
+	import { line, curve, subject } from './util';
 	import Wartegg from './Wartegg.svelte';
 	import ResultsAll from './ResultsAll.svelte';
 	import ResultsSeveral from './ResultsSeveral.svelte';
-	import Pages from './Pages.svelte';
-	import NavButton from './NavButton.svelte';
-	import { line, curve, subject } from './util';
-  	import { Router, Link, Route } from "svelte-routing";
+
   	export let url = "";
 
     const strokeStyle = "black";
-    const lineWidth = 2;
+
+	function generateItems() {
+		return [
+			{
+				id: 'A',
+				init(ctx) {
+					ctx.beginPath();
+					ctx.fillStyle = strokeStyle;
+					ctx.arc(99, 99, 2, 0, 2 * Math.PI, false);
+					ctx.fill();
+				}
+			},
+			{
+				id: 'B',
+				init(ctx) {
+					ctx.beginPath();
+					curve(ctx, 42, 62, 50, 50, 55, 60, 63, 48);
+					ctx.stroke();
+				}
+			},
+			{
+				id: 'C',
+				init(ctx) {
+					line(ctx, 25, 200, 25, 175);
+					line(ctx, 50, 200, 50, 150);
+					line(ctx, 75, 200, 75, 125);
+				}
+			},
+			{
+				id: 'D',
+				init(ctx) {
+					ctx.beginPath();
+					ctx.fillStyle = strokeStyle;
+					ctx.fillRect(140, 45, 15, 15);
+					ctx.stroke();
+				}
+			},
+			{
+				id: 'E',
+				init(ctx) {
+					line(ctx, 20, 200 - 20, 55, 200 - 55);
+					line(ctx, 45, 200 - 85, 85, 200 - 45);
+				}
+			},
+			{
+				id: 'F',
+				init(ctx) {
+					line(ctx, 40, 40, 100, 40);
+					line(ctx, 150, 70, 150, 120);
+				}
+			},
+			{
+				id: 'G',
+				init(ctx) {
+					ctx.beginPath();
+					ctx.strokeStyle = strokeStyle;
+					ctx.lineWidth = 4;
+					ctx.setLineDash([2, 5]);
+					ctx.arc(140, 140, 15, 0.3 * Math.PI, 1.3 * Math.PI, false);
+					ctx.stroke();
+					ctx.setLineDash([]);
+				}
+			},
+			{
+				id: 'H',
+				init(ctx) {
+					ctx.beginPath();
+					curve(ctx, 40, 75, 70, 30, 130, 30, 160, 75)
+					ctx.stroke();
+				}
+			}
+		];
+	}
  
-	let items = [
-		{
-			id: 'A',
-			init(ctx) {
-				ctx.beginPath();
-				ctx.fillStyle = strokeStyle;
-				ctx.arc(99, 99, 2, 0, 2 * Math.PI, false);
-				ctx.fill();
-			}
-		},
-		{
-			id: 'B',
-			init(ctx) {
-				ctx.beginPath();
-				curve(ctx, 42, 62, 50, 50, 55, 60, 63, 48);
-				ctx.stroke();
-			}
-		},
-		{
-			id: 'C',
-			init(ctx) {
-				line(ctx, 25, 200, 25, 175);
-				line(ctx, 50, 200, 50, 150);
-				line(ctx, 75, 200, 75, 125);
-			}
-		},
-		{
-			id: 'D',
-			init(ctx) {
-				ctx.beginPath();
-				ctx.fillStyle = strokeStyle;
-				ctx.fillRect(140, 45, 15, 15);
-				ctx.stroke();
-			}
-		},
-		{
-			id: 'E',
-			init(ctx) {
-				line(ctx, 20, 200 - 20, 55, 200 - 55);
-				line(ctx, 45, 200 - 85, 85, 200 - 45);
-			}
-		},
-		{
-			id: 'F',
-			init(ctx) {
-				line(ctx, 40, 40, 100, 40);
-				line(ctx, 150, 70, 150, 120);
-			}
-		},
-		{
-			id: 'G',
-			init(ctx) {
-				ctx.beginPath();
-            	ctx.strokeStyle = strokeStyle;
-    			ctx.lineWidth = 4;
-				ctx.setLineDash([2, 5]);
-				ctx.arc(140, 140, 15, 0.3 * Math.PI, 1.3 * Math.PI, false);
-				ctx.stroke();
-				ctx.setLineDash([]);
-			}
-		},
-		{
-			id: 'H',
-			init(ctx) {
-				ctx.beginPath();
-				curve(ctx, 40, 75, 70, 30, 130, 30, 160, 75)
-				ctx.stroke();
-			}
-		}
-	];
+	let items = generateItems();
 
 	const itemsById = items.reduce((p, c) => (p[c.id] = c, p), {});
-
 	function getItems(...ids) {
 		return ids.map(id => itemsById[id]);
 	}
@@ -154,9 +157,6 @@
 		}
 	];
 
-	import { navigate } from "svelte-routing";
-	import { setContext, tick } from 'svelte';
-
 	const [events, emitEvent] = subject();
 
 	setContext('events', {
@@ -164,21 +164,7 @@
 		emitEvent
 	});
 
-	
 	setContext('nav', {
-		nextPage() {
-
-			// export let pages;
-			// export let currentIndex;
-
-			// let count;
-			// $: {
-			// 	count = pages.length;
-			// }
-		},
-		prevPage() {
-
-		},
 		pages,
 		toPage(index) {
 			navigate(`/results/c/${index}`);
@@ -186,18 +172,9 @@
 	});
 
 	navigate('/');
-	let params;
-	$: console.log({params})
-
 </script>
 
 <Router url="{url}">
-	<!-- <nav>
-	  <Link to="/">Home</Link>
-	  <Link to="results/c/0">Submit</Link>
-	  <Link to="results/all">All</Link>
-	  <Link to="results/c/0">Two</Link>
-	</nav> -->
 	<main>
 		<Route path="/">
 			<Wartegg {items}></Wartegg>
@@ -234,5 +211,11 @@
 		box-shadow: 0 2px 20px 0px #0000005e;
 		padding: 2rem;
 		background: var(--background);
+	}
+
+	@media only screen and (max-width: 575.98px) {
+		main {
+			margin: 0;
+		}
 	}
 </style>

@@ -1,5 +1,5 @@
 <script>
-    import { getContext, onMount } from 'svelte';
+    import { getContext } from 'svelte';
 	import { navigate } from 'svelte-routing';
 	import Item from './Item.svelte';
 

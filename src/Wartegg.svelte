@@ -41,7 +41,7 @@
 				<div class="title">{item.id}</div>
 			{/each}
 		</div>
-		<div class="elements row" style="padding-bottom: 0;">
+		<div class="elements row elements--first" style="">
 			{#each items.slice(0, 4) as data (data.id)}
 				<Item dataInit={data.init} 
 					bind:dataUrl={data.dataUrl} 
@@ -94,8 +94,14 @@
 
 <style>
 
+	.wartegg {
+		display: flex;
+		flex-wrap: wrap;
+	}
+
 	.form {
-		min-width: 600px;	
+		width: 100%;
+		max-width: 600px;
 		color: var(--c-crimson);
 	}
 
@@ -138,17 +144,56 @@
 		text-align: center;
 		color: var(--c-crimson);
 		flex: 1 0 200px;
+
+		display: flex;
+		justify-content: center;
+		align-items: center;
 	}
 
 	.row {
 		padding: 1.5rem;
 		display: flex;
 		column-gap: 1.5rem;
+		row-gap: 1.5rem;
 		width: fit-content;
+	}
+
+	.elements--first {
+		padding-bottom: 0;
 	}
 
 	.titles {
 		padding: 0 1.5rem;
 		display: flex;
+	}
+
+	@media only screen and (max-width: 992px) {
+		.row {
+			flex-direction: column;
+		}
+
+		.titles {
+			padding: 1.5rem 1rem;
+			display: flex;
+		}
+
+		.elements--first {
+			padding-right: 0;
+		}
+	}
+
+	
+	@media only screen and (min-width: 992px) {
+		.wartegg {
+			
+			flex-direction: column;
+		}
+	}
+
+	@media only screen and (max-width: 575.98px) {
+
+		.elements {
+			padding: 1.5rem;
+		}
 	}
 </style>

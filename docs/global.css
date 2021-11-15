@@ -25,7 +25,7 @@ body {
 
 
 .elements > .element {
-	flex-basis: 25%;
+	/* flex-basis: 25%; */
 }
 
 .btn {
@@ -57,3 +57,8 @@ body {
 	display: flex;
 	justify-content: flex-end;	
 }
+
+input {
+    min-width: 0;
+}
+

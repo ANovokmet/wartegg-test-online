@@ -1,5 +1,5 @@
 <script>
-    import { onMount, getContext } from 'svelte';
+    import { getContext } from 'svelte';
 	import Item from './Item.svelte';
 
     export let items;
@@ -64,11 +64,6 @@ $:console.log({params})
 	.elements {
 		user-select: none;
 		background-color: black;
-	}
-
-	main {
-		margin: 0 auto;
-		max-width: 1024px;
 	}
 
 	.title {
