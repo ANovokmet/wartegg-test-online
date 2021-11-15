@@ -2,6 +2,7 @@
 	import Item from './Item.svelte';
 	import { navigate } from "svelte-routing";
 	import { getContext, tick } from 'svelte';
+	import { BASE_PATH } from './config';
 	
     export let items;
 	let edit = true;
@@ -17,7 +18,7 @@
 	async function onSubmit() {
 		emitEvent({type: 'save'});
 		await tick();
-		navigate('/results/c/0');
+		navigate(`${BASE_PATH}/results/c/0`);
 	}
 
 </script>

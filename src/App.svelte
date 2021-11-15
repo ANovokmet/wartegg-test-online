@@ -164,29 +164,33 @@
 		emitEvent
 	});
 
+
+	import { BASE_PATH } from './config';
+
 	setContext('nav', {
 		pages,
 		toPage(index) {
-			navigate(`/results/c/${index}`);
+			console.log('nav', `${BASE_PATH}/results/c/${index}`)
+			navigate(`${BASE_PATH}/results/c/${index}`);
 		}
 	});
 
-	navigate('/');
+	navigate(BASE_PATH);
 </script>
 
-<Router basepath="/wartegg-test-online" url="{url}">
+<Router basepath={BASE_PATH} url="{url}">
 	<main>
 		<Route path="/">
 			<Wartegg {items}></Wartegg>
 		</Route>
-		<Route path="results/c/:index" let:params>
+		<Route path="/results/c/:index" let:params>
 			{#if pages[params.index].component} 
 				<ResultsAll items={items} {params}></ResultsAll>
 			{:else}
 				<ResultsSeveral {...pages[params.index]} {params}></ResultsSeveral>
 			{/if}
 		</Route>
-		<Route path="results/all">
+		<Route path="/results/all">
 			<ResultsAll items={items}></ResultsAll>
 		</Route>
 	</main>

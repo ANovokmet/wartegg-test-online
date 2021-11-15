@@ -2,6 +2,7 @@
     import { getContext } from 'svelte';
 	import { navigate } from 'svelte-routing';
 	import Item from './Item.svelte';
+	import { BASE_PATH } from './config';
 
     export let items;
 	export let params;
@@ -69,7 +70,7 @@
 	{#if +params.index > 0}
 		<button class="nav__btn btn" on:click={() => toPage(+params.index - 1)}>Previous</button>
 	{/if}
-	<button class="nav__btn btn" on:click={() => navigate('/')}>Draw again</button>
+	<button class="nav__btn btn" on:click={() => navigate(BASE_PATH)}>Draw again</button>
 	{#if +params.index < pages.length - 1}
 		<button class="nav__btn btn" on:click={() => toPage(+params.index + 1)}>Next</button>
 	{/if}

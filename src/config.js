@@ -1,0 +1,1 @@
+export const BASE_PATH = '/wartegg-test-online';
