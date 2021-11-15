@@ -167,14 +167,14 @@
 	setContext('nav', {
 		pages,
 		toPage(index) {
-			navigate(`/results/c/${index}`);
+			navigate(`results/c/${index}`);
 		}
 	});
 
-	navigate('/');
+	navigate('');
 </script>
 
-<Router url="{url}">
+<Router basepath="/wartegg-test-online" url="{url}">
 	<main>
 		<Route path="/">
 			<Wartegg {items}></Wartegg>

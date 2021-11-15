@@ -17,7 +17,7 @@
 	async function onSubmit() {
 		emitEvent({type: 'save'});
 		await tick();
-		navigate('/results/c/0');
+		navigate('results/c/0');
 	}
 
 </script>
@@ -185,13 +185,11 @@
 	
 	@media only screen and (min-width: 992px) {
 		.wartegg {
-			
 			flex-direction: column;
 		}
 	}
 
 	@media only screen and (max-width: 575.98px) {
-
 		.elements {
 			padding: 1.5rem;
 		}

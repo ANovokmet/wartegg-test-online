@@ -69,7 +69,7 @@
 	{#if +params.index > 0}
 		<button class="nav__btn btn" on:click={() => toPage(+params.index - 1)}>Previous</button>
 	{/if}
-	<button class="nav__btn btn" on:click={() => navigate('/')}>Draw again</button>
+	<button class="nav__btn btn" on:click={() => navigate('')}>Draw again</button>
 	{#if +params.index < pages.length - 1}
 		<button class="nav__btn btn" on:click={() => toPage(+params.index + 1)}>Next</button>
 	{/if}
